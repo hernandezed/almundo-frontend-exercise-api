@@ -5,16 +5,20 @@ let bodyParser = require('body-parser');
 let port = 8080;
 let hotelesRouter = require('./app/routes/hotelRouter');
 let queryParser = require('express-query-int');
+var models = require('./app/models');
 
-app.use(cors());
-app.use(bodyParser.json());
-app.use(queryParser());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.text());
-app.use(bodyParser.json({type: 'application/json'}));
-app.use('/hoteles', hotelesRouter);
+models.sequelize.sync().then(function () {
+    app.use(cors());
+    app.use(bodyParser.json());
+    app.use(queryParser());
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(bodyParser.text());
+    app.use(bodyParser.json({type: 'application/json'}));
+    app.use('/hoteles', hotelesRouter);
 
-app.listen(port);
-console.log("Levantado en el puerto " + port);
+    app.listen(port);
+    console.log("Levantado en el puerto " + port);
 
+});
 module.exports = app; // for testing
+

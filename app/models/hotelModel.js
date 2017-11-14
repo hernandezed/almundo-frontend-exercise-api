@@ -1,9 +1,19 @@
-var hoteles = require('../data/data');
-var _ = require("underscore");
-
-module.exports = {
-    find: (filtros) => {
-        return _.where(hoteles, filtros);
-    }
-}
-
+module.exports = function (sequelize, DataTypes) {
+    var Hotel = sequelize.define("Hotel", {
+        id: {type: DataTypes.INTEGER, primaryKey: true},
+        name: DataTypes.STRING,
+        image: DataTypes.STRING,
+        stars: DataTypes.INTEGER,
+        price: DataTypes.DOUBLE(6, 2),
+        amenities: {type: DataTypes.STRING,
+            get: function () {
+                return this.getDataValue('amenities').split(',')
+            },
+            set: function (val) {
+                this.setDataValue('amenities', val.join(','));
+            }}
+    }, {
+        timestamps: false
+    });
+    return Hotel;
+};

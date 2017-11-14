@@ -1,12 +1,14 @@
-let hotelModel = require('../models/hotelModel');
+let hotelModel = require('../models').Hotel;
 
 module.exports = {
     obtenerTodos: (req, res, next) => {
-        hoteles = hotelModel.find(req.query);
-        if (hoteles.length > 0) {
-            res.send(hoteles);
-        } else {
-            res.status(404).send();
-        }
+
+        hotelModel.findAll().then(function (hoteles) {
+            if (hoteles.length > 0) {
+                res.json(hoteles).send();
+            } else {
+                res.status(404).send();
+            }
+        });
     }
 }
