@@ -1,5 +1,5 @@
 {
-    "port": 8084,
+    "port": 8080,
     "db": {
         "dialect": "sqlite",
         "storage": "./db.development.sqlite"
