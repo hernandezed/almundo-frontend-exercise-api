@@ -7,7 +7,7 @@ data.forEach(function (hotel) {
 
 module.exports = {
     preparar: () => {
-        return HotelModel.truncate().then(function () {
+        return HotelModel.truncate().then(() => {
             return HotelModel.bulkCreate(data);
         });
     }

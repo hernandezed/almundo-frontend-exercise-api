@@ -24,8 +24,13 @@ module.exports = (function () {
         }
     }
 
+    function guardar(nuevoHotel) {
+        return HotelModel.create(nuevoHotel);
+    }
+
     return {
-        buscarTodos: buscarTodos
+        buscarTodos: buscarTodos,
+        guardar: guardar
     };
 
 })();
