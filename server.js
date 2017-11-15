@@ -1,11 +1,12 @@
-let cors = require('cors');
-let express = require('express');
-let app = express();
-let bodyParser = require('body-parser');
-let port = 8080;
-let hotelesRouter = require('./app/routes/hotelRouter');
-let queryParser = require('express-query-int');
-var models = require('./app/models');
+const cors = require('cors');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const config = require('config');
+const port = config.port || 8080;
+const hotelesRouter = require('./app/routes/hotelRouter');
+const queryParser = require('express-query-int');
+const models = require('./app/models');
 
 models.sequelize.sync().then(function () {
     app.use(cors());
