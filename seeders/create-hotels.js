@@ -1,9 +1,9 @@
-var data = require('../app/data/data');
+var data = require('./data/data');
 
 data.forEach(function (hotel) {
     hotel.amenities = hotel.amenities.toString();
     hotel.id = parseInt(hotel.id);
-})
+});
 
 module.exports = {
     up: function (queryInterface, Sequelize) {

@@ -26,6 +26,6 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "cross-env NODE_ENV=test ./node_modules/sequelize-cli/bin/sequelize db:seed:all && cross-env NODE_ENV=test ./node_modules/.bin/mocha"
+    "test": "cross-env NODE_ENV=test && mocha --recursive"
   }
 }

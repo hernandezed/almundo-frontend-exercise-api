@@ -9,8 +9,8 @@ module.exports = function (sequelize, DataTypes) {
             get: function () {
                 return this.getDataValue('amenities').split(',')
             },
-            set: function (val) {
-                this.setDataValue('amenities', val.join(','));
+            set: function (amenities) {
+                this.setDataValue('amenities', amenities.join(','));
             }}
     }, {
         timestamps: false
