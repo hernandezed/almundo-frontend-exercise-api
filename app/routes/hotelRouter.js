@@ -4,4 +4,6 @@ let hotelController = require('../controllers/hotelController');
 
 router.get('/', hotelController.buscarTodos);
 router.get('/:id', hotelController.buscarPorId);
+router.post('/', hotelController.guardar);
+router.delete('/:id', hotelController.borrar);
 module.exports = router;
