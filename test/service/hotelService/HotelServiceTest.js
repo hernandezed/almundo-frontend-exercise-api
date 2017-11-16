@@ -46,7 +46,5 @@ describe('HotelService', () => {
         it('Debe lanzar error con id: 161901 y nombre null', HotelServiceTestCases.actualizar_conNombreNull_lanzaError);
         it('Debe lanzar error con hotel con nombre vacio', HotelServiceTestCases.actualizar_conHotelConNombreVacio_lanzaError);
         it('Debe lanzar error con hotel con nombre solo espacios', HotelServiceTestCases.actualizar_conHotelConNombreSoloEspacios_lanzaError);
-//        it('Debe lanzar error con hotel con nombre vacio', HotelServiceTestCases.guardar_conHotelConNombreVacio_lanzaError);
-//        it('Debe lanzar error con hotel con nombre solo espacios', HotelServiceTestCases.guardar_conHotelConNombreSoloEspacios_lanzaError);
     });
 });

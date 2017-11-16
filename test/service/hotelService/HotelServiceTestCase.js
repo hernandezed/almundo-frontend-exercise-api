@@ -197,7 +197,9 @@ module.exports = {
         let id = 161901;
         HotelService.actualizar(id, nuevoHotel).then((hotelGuardado) => {
             nuevoHotel.id = id;
-            hotelGuardado.id.should.not.be.deep.equal(hotelAntes);
+            hotelGuardado.name.should.not.be.equal(hotelAntes.name);
+            hotelGuardado.image.should.not.be.equal(hotelAntes.image);
+            hotelGuardado.price.should.not.be.equal(hotelAntes.price);
             done();
         })
     },
@@ -237,10 +239,9 @@ module.exports = {
         };
         let id = 161901;
         HotelService.actualizar(id, nuevoHotel).catch((err) => {
-            console.log(err)
             err.descripcion.should.be.equal("Indique el nombre del hotel");
             done();
-        })
+        });
     },
     actualizar_conHotelConNombreVacio_lanzaError(done) {
         let nuevoHotel = {
@@ -280,7 +281,6 @@ module.exports = {
         HotelService.actualizar(id, nuevoHotel).catch((err) => {
             err.descripcion.should.be.equal("Indique el nombre del hotel")
             done();
-        })
+        });
     }
-
 }
