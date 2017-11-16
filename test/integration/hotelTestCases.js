@@ -67,5 +67,36 @@ module.exports = {
                     res.body.length.should.be.eql(83);
                     done();
                 });
+    },
+    getHotel_conIdValido_retornaHotelYStatus200: (done) => {
+        let id = 249942;
+        hotelBuscado = "Hotel Stefanos";
+        chai.request(server)
+                .get('/hoteles/' + id)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.name.should.be.equal(hotelBuscado);
+                    res.body.id.should.be.equal(id);
+                    done();
+                });
+    },
+    getHotel_conIdInexistente_retornaStatus404: (done) => {
+        let id = 12499421;
+        hotelBuscado = "Hotel Stefanos";
+        chai.request(server)
+                .get('/hoteles/' + id)
+                .end((err, res) => {
+                    res.should.have.status(404);
+                    done();
+                });
+    },
+    getHotel_conIdNulo_retornaStatus400: (done) => {
+        hotelBuscado = "Hotel Stefanos";
+        chai.request(server)
+                .get('/hoteles/null')
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    done();
+                });
     }
 }
