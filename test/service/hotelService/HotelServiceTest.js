@@ -35,13 +35,18 @@ describe('HotelService', () => {
     describe('eliminar', () => {
         before(MockBaseDeDatos.preparar);
         it('Debe eliminar hotel con id: 249942', HotelServiceTestCases.eliminar_conIdValido_borraHotel);
-        it('No debe eliminar hoteles con id null', HotelServiceTestCases.eliminar_conIdNulo_noBorraHoteles);
-        it('No debe eliminar hoteles con id: 12499422', HotelServiceTestCases.eliminar_conIdValido_noBorraHoteles);
+        it('Debe lanzar error con id null', HotelServiceTestCases.eliminar_conIdNulo_lanzaError);
+        it('Debee lanzar error con id: 12499422', HotelServiceTestCases.eliminar_conIdInvalido_lanzaError);
     });
 
     describe('actualizar', () => {
         beforeEach(MockBaseDeDatos.preparar);
         it('Debe retornar hotel actualizado con id: 161901', HotelServiceTestCases.actualizar_conHotelYIdValido_retornaHotelActualizado);
-
+        it('Debe lanzar error con id: 1619011', HotelServiceTestCases.actualizar_conIdInexistente_lanzaError);
+        it('Debe lanzar error con id: 161901 y nombre null', HotelServiceTestCases.actualizar_conNombreNull_lanzaError);
+        it('Debe lanzar error con hotel con nombre vacio', HotelServiceTestCases.actualizar_conHotelConNombreVacio_lanzaError);
+        it('Debe lanzar error con hotel con nombre solo espacios', HotelServiceTestCases.actualizar_conHotelConNombreSoloEspacios_lanzaError);
+//        it('Debe lanzar error con hotel con nombre vacio', HotelServiceTestCases.guardar_conHotelConNombreVacio_lanzaError);
+//        it('Debe lanzar error con hotel con nombre solo espacios', HotelServiceTestCases.guardar_conHotelConNombreSoloEspacios_lanzaError);
     });
 });

@@ -152,21 +152,21 @@ module.exports = {
             done();
         });
     },
-    eliminar_conIdNulo_noBorraHoteles(done) {
+    eliminar_conIdNulo_lanzaError(done) {
         let id = null;
-        HotelService.borrar(id).then((filasAfectadas) => {
-            filasAfectadas.should.be.equal(0);
+        HotelService.borrar(id).catch((err) => {
+            err.descripcion.should.be.equal("El id a borrar no puede ser nulo");
             done();
         });
     },
-    eliminar_conIdValido_noBorraHoteles(done) {
+    eliminar_conIdInvalido_lanzaError(done) {
         let id = 1249942;
-        HotelService.borrar(id).then((filasAfectadas) => {
-            filasAfectadas.should.be.equal(0);
+        HotelService.borrar(id).catch((err) => {
+            err.descripcion.should.be.equal("El id a borrar no existe");
             done();
         });
     },
-    actualizar_conHotelValido_retornaHotelActualizado(done) {
+    actualizar_conHotelYIdValido_retornaHotelActualizado(done) {
         let nuevoHotel = {
             name: "Hotel Stefanos",
             stars: 5,
@@ -198,6 +198,87 @@ module.exports = {
         HotelService.actualizar(id, nuevoHotel).then((hotelGuardado) => {
             nuevoHotel.id = id;
             hotelGuardado.id.should.not.be.deep.equal(hotelAntes);
+            done();
+        })
+    },
+    actualizar_conIdInexistente_lanzaError(done) {
+        let nuevoHotel = {
+            name: "Hotel Stefanos",
+            stars: 5,
+            price: 994.18,
+            image: "4900059_30_b.jpg",
+            amenities: [
+                "safety-box",
+                "nightclub",
+                "deep-soaking-bathtub",
+                "beach",
+                "business-center"
+            ]
+        };
+        let id = 1619011;
+        HotelService.actualizar(id, nuevoHotel).catch((err) => {
+            err.descripcion.should.be.equal("El id que intente actualizar no existe");
+            done();
+        })
+    },
+    actualizar_conNombreNull_lanzaError(done) {
+        let nuevoHotel = {
+            name: null,
+            stars: 5,
+            price: 994.18,
+            image: "4900059_30_b.jpg",
+            amenities: [
+                "safety-box",
+                "nightclub",
+                "deep-soaking-bathtub",
+                "beach",
+                "business-center"
+            ]
+        };
+        let id = 161901;
+        HotelService.actualizar(id, nuevoHotel).catch((err) => {
+            console.log(err)
+            err.descripcion.should.be.equal("Indique el nombre del hotel");
+            done();
+        })
+    },
+    actualizar_conHotelConNombreVacio_lanzaError(done) {
+        let nuevoHotel = {
+            name: "",
+            stars: 5,
+            price: 994.18,
+            image: "4900059_30_b.jpg",
+            amenities: [
+                "safety-box",
+                "nightclub",
+                "deep-soaking-bathtub",
+                "beach",
+                "business-center"
+            ]
+        };
+        let id = 161901;
+        HotelService.actualizar(id, nuevoHotel).catch((err) => {
+            err.descripcion.should.be.equal("Indique el nombre del hotel")
+            done();
+        })
+    },
+    actualizar_conHotelConNombreSoloEspacios_lanzaError(done) {
+        let nuevoHotel = {
+            name: "     ",
+            stars: 5,
+            price: 994.18,
+            image: "4900059_30_b.jpg",
+            amenities: [
+                "safety-box",
+                "nightclub",
+                "deep-soaking-bathtub",
+                "beach",
+                "business-center"
+            ]
+        };
+        let id = 161901;
+        HotelService.actualizar(id, nuevoHotel).catch((err) => {
+            err.descripcion.should.be.equal("Indique el nombre del hotel")
             done();
         })
     }

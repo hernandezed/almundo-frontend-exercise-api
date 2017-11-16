@@ -37,6 +37,20 @@ module.exports = (function () {
             where: {
                 id: id
             }
+        }).then((cantidadBorrados) => {
+            if (!id) {
+                throw {
+                    descripcion: "El id a borrar no puede ser nulo"
+                }
+            } else if (!cantidadBorrados) {
+                throw {
+                    descripcion: "El id a borrar no existe"
+                }
+            } else {
+                return new Promise((resolve, reject) => {
+                    resolve(cantidadBorrados);
+                })
+            }
         })
     }
 
@@ -45,9 +59,19 @@ module.exports = (function () {
             where: {
                 id: id
             }
-        }).then(() => {
-            return buscarPorId(id);
-        })
+        }).catch((err) => {
+            throw {
+                descripcion: "Indique el nombre del hotel"
+            }
+        }).then((hotelActualizado) => {
+            if (hotelActualizado[0] !== 0) {
+                return buscarPorId(id);
+            } else {
+                throw {
+                    descripcion: "El id que intente actualizar no existe"
+                }
+            }
+        });
     }
 
     return {
