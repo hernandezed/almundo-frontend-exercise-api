@@ -28,9 +28,34 @@ module.exports = (function () {
         return HotelModel.create(nuevoHotel);
     }
 
+    function buscarPorId(id) {
+        return HotelModel.findById(id);
+    }
+
+    function borrar(id) {
+        return HotelModel.destroy({
+            where: {
+                id: id
+            }
+        })
+    }
+
+    function actualizar(id, nuevoHotel) {
+        return HotelModel.update(nuevoHotel, {
+            where: {
+                id: id
+            }
+        }).then(() => {
+            return buscarPorId(id);
+        })
+    }
+
     return {
         buscarTodos: buscarTodos,
-        guardar: guardar
+        guardar: guardar,
+        buscarPorId: buscarPorId,
+        borrar: borrar,
+        actualizar: actualizar
     };
 
 })();

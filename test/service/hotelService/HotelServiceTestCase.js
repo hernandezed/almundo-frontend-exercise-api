@@ -1,5 +1,6 @@
 const HotelService = require('../../../app/service/HotelService');
-
+const HotelModel = require('../../../app/models').Hotel;
+const assert = require('chai').assert;
 module.exports = {
 
     buscarTodos_conCienHotelesEnLaBase_retornaListaDeHoteles(done) {
@@ -121,8 +122,84 @@ module.exports = {
             err.name.should.be.equal('SequelizeValidationError');
             done();
         });
+    },
+    buscarPorId_conIdValido_retornaHotel(done) {
+        let id = 249942;
+        hotelBuscado = "Hotel Stefanos";
+        HotelService.buscarPorId(id).then((hotel) => {
+            hotel.name.should.be.equal(hotelBuscado);
+            done();
+        });
+    },
+    buscarPorId_conIdInexistente_retornaObjetoVacio(done) {
+        let id = 1249942;
+        HotelService.buscarPorId(id).then((hotel) => {
+            assert.isNull(hotel);
+            done();
+        })
+    },
+    buscarPorId_conIdNulo_retornaNull(done) {
+        let id = null;
+        HotelService.buscarPorId(id).then((hotel) => {
+            assert.isNull(hotel);
+            done();
+        });
+    },
+    eliminar_conIdValido_borraHotel(done) {
+        let id = 249942;
+        HotelService.borrar(id).then((filasAfectadas) => {
+            filasAfectadas.should.be.equal(1);
+            done();
+        });
+    },
+    eliminar_conIdNulo_noBorraHoteles(done) {
+        let id = null;
+        HotelService.borrar(id).then((filasAfectadas) => {
+            filasAfectadas.should.be.equal(0);
+            done();
+        });
+    },
+    eliminar_conIdValido_noBorraHoteles(done) {
+        let id = 1249942;
+        HotelService.borrar(id).then((filasAfectadas) => {
+            filasAfectadas.should.be.equal(0);
+            done();
+        });
+    },
+    actualizar_conHotelValido_retornaHotelActualizado(done) {
+        let nuevoHotel = {
+            name: "Hotel Stefanos",
+            stars: 5,
+            price: 994.18,
+            image: "4900059_30_b.jpg",
+            amenities: [
+                "safety-box",
+                "nightclub",
+                "deep-soaking-bathtub",
+                "beach",
+                "business-center"
+            ]
+        };
+        let hotelAntes = {
+            "id": 161901,
+            "name": "Hotel Santa Cruz",
+            "stars": 3,
+            "price": 1267.57,
+            "image": "6623490_6_b.jpg",
+            "amenities": [
+                "nightclub",
+                "business-center",
+                "bathtub",
+                "newspaper",
+                "restaurant"
+            ]
+        }
+        let id = 161901;
+        HotelService.actualizar(id, nuevoHotel).then((hotelGuardado) => {
+            nuevoHotel.id = id;
+            hotelGuardado.id.should.not.be.deep.equal(hotelAntes);
+            done();
+        })
     }
-
-
 
 }
