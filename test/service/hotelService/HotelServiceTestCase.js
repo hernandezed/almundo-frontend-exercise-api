@@ -79,7 +79,8 @@ module.exports = {
             ]
         }
         HotelService.guardar(nuevoHotel).catch((err) => {
-            err.name.should.be.equal('SequelizeValidationError');
+            err.codigo.should.be.equal(2);
+            err.descripcion.should.be.equal('Indique el nombre del hotel');
             done();
         });
     },
@@ -99,7 +100,8 @@ module.exports = {
         };
 
         HotelService.guardar(nuevoHotel).catch((err) => {
-            err.name.should.be.equal('SequelizeValidationError');
+            err.codigo.should.be.equal(2);
+            err.descripcion.should.be.equal('Indique el nombre del hotel');
             done();
         });
     },
@@ -119,7 +121,8 @@ module.exports = {
         };
 
         HotelService.guardar(nuevoHotel).catch((err) => {
-            err.name.should.be.equal('SequelizeValidationError');
+            err.codigo.should.be.equal(2);
+            err.descripcion.should.be.equal('Indique el nombre del hotel');
             done();
         });
     },

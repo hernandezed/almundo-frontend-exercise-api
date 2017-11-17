@@ -25,9 +25,18 @@ module.exports = (function () {
     }
 
     function guardar(nuevoHotel) {
-        return HotelModel.create(nuevoHotel);
+        return HotelModel.create(nuevoHotel).catch((err) => {
+            throw {
+                codigo: 2,
+                descripcion: "Indique el nombre del hotel"
+            }
+        }).then((hotel) => {
+            return new Promise((resolve, reject) => {
+                resolve(hotel)
+            })
+        });
     }
-
+    
     function buscarPorId(id) {
         return HotelModel.findById(id);
     }
