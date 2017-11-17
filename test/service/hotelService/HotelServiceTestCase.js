@@ -200,6 +200,8 @@ module.exports = {
             hotelGuardado.name.should.not.be.equal(hotelAntes.name);
             hotelGuardado.image.should.not.be.equal(hotelAntes.image);
             hotelGuardado.price.should.not.be.equal(hotelAntes.price);
+            hotelGuardado.stars.should.not.be.equal(hotelAntes.stars);
+            hotelGuardado.amenities.should.not.be.equal(hotelAntes.amenities);
             done();
         })
     },
@@ -219,6 +221,7 @@ module.exports = {
         };
         let id = 1619011;
         HotelService.actualizar(id, nuevoHotel).catch((err) => {
+            err.codigo.should.be.equal(1);
             err.descripcion.should.be.equal("El id que intente actualizar no existe");
             done();
         })
@@ -239,6 +242,7 @@ module.exports = {
         };
         let id = 161901;
         HotelService.actualizar(id, nuevoHotel).catch((err) => {
+            err.codigo.should.be.equal(2);
             err.descripcion.should.be.equal("Indique el nombre del hotel");
             done();
         });
@@ -259,6 +263,7 @@ module.exports = {
         };
         let id = 161901;
         HotelService.actualizar(id, nuevoHotel).catch((err) => {
+            err.codigo.should.be.equal(2);
             err.descripcion.should.be.equal("Indique el nombre del hotel")
             done();
         })
@@ -279,6 +284,7 @@ module.exports = {
         };
         let id = 161901;
         HotelService.actualizar(id, nuevoHotel).catch((err) => {
+            err.codigo.should.be.equal(2);
             err.descripcion.should.be.equal("Indique el nombre del hotel")
             done();
         });

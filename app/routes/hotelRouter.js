@@ -6,4 +6,5 @@ router.get('/', hotelController.buscarTodos);
 router.get('/:id', hotelController.buscarPorId);
 router.post('/', hotelController.guardar);
 router.delete('/:id', hotelController.borrar);
+router.put('/:id', hotelController.actualizar);
 module.exports = router;

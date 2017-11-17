@@ -32,12 +32,19 @@ describe('Hoteles', () => {
     describe('POST /hoteles', () => {
         before(MockBaseDeDatos.preparar);
         it('Debe retornar hotel guardado con hotel valido, status=201', HotelTestCases.postHotel_conHotelValido_retornaNuevoHotelYStatus201);
-        it('Debe no retornar hotel con hotel invalido, status=400', HotelTestCases.postHotel_conHotelInvalido_retornaStatus400);
+        it('Debe retornar status=400 con hotel invalido', HotelTestCases.postHotel_conHotelInvalido_retornaStatus400);
     });
 
     describe('DELETE /hoteles', () => {
         before(MockBaseDeDatos.preparar);
         it('Debe retornar status=204', HotelTestCases.deleteHotel_conIdValido_retornaStatus204);
         it('Debe no retornar status=404', HotelTestCases.deleteHotel_conIdInvalido_retornaStatus404);
+    });
+
+    describe('PUT /hoteles', () => {
+        before(MockBaseDeDatos.preparar);
+        it('Debe retornar hotel actualizado con hotel valido, status=200', HotelTestCases.putHotel_conHotelValido_retornaHotelActualizadoYStatus200);
+        it('Debe retornar status=400 con hotel invalido', HotelTestCases.putHotel_conHotelInvalido_retornaStatus400);
+        it('Debe retornar status=404 con id inexistente', HotelTestCases.putHotel_conIdInexistente_retornaStatus404);
     });
 });

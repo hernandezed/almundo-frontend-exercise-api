@@ -61,6 +61,7 @@ module.exports = (function () {
             }
         }).catch((err) => {
             throw {
+                codigo: 2,
                 descripcion: "Indique el nombre del hotel"
             }
         }).then((hotelActualizado) => {
@@ -68,6 +69,7 @@ module.exports = (function () {
                 return buscarPorId(id);
             } else {
                 throw {
+                    codigo: 1,
                     descripcion: "El id que intente actualizar no existe"
                 }
             }

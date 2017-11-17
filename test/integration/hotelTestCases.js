@@ -146,10 +146,84 @@ module.exports = {
                 });
 
     },
-    deleteHotel_conIdValido_retornaStatus204: (done) => {
+    deleteHotel_conIdInvalido_retornaStatus404: (done) => {
         let id = 2499421;
         chai.request(server)
                 .delete(hotelesUri + "/" + id)
+                .end((err, res) => {
+                    res.should.have.status(404);
+                    done();
+                });
+
+    },
+    putHotel_conHotelValido_retornaHotelActualizadoYStatus200(done) {
+        let nuevoHotel = {
+            name: "Hotel Stefanos",
+            stars: 5,
+            price: 994.18,
+            image: "4900059_30_b.jpg",
+            amenities: [
+                "safety-box",
+                "nightclub",
+                "deep-soaking-bathtub",
+                "beach",
+                "business-center"
+            ]
+        };
+        nombreAntes = "Hotel Santa Cruz";
+        let id = 161901;
+        chai.request(server)
+                .put(hotelesUri + "/" + id)
+                .send(nuevoHotel)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.id.should.be.equal(id);
+                    res.body.name.should.be.not.equal(nombreAntes);
+                    done();
+                });
+    },
+    putHotel_conHotelInvalido_retornaStatus400(done) {
+        let nuevoHotel = {
+            name: "     ",
+            stars: 5,
+            price: 994.18,
+            image: "4900059_30_b.jpg",
+            amenities: [
+                "safety-box",
+                "nightclub",
+                "deep-soaking-bathtub",
+                "beach",
+                "business-center"
+            ]
+        };
+        nombreAntes = "Hotel Santa Cruz";
+        let id = 161901;
+        chai.request(server)
+                .put(hotelesUri + "/" + id)
+                .send(nuevoHotel)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    done();
+                });
+    },
+    putHotel_conIdInexistente_retornaStatus404(done) {
+        let id = 1619011;
+        let nuevoHotel = {
+            name: "Hotel Stefanos",
+            stars: 5,
+            price: 994.18,
+            image: "4900059_30_b.jpg",
+            amenities: [
+                "safety-box",
+                "nightclub",
+                "deep-soaking-bathtub",
+                "beach",
+                "business-center"
+            ]
+        };
+        chai.request(server)
+                .put(hotelesUri + "/" + id)
+                .send(nuevoHotel)
                 .end((err, res) => {
                     res.should.have.status(404);
                     done();
