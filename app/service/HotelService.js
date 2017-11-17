@@ -2,6 +2,20 @@ const HotelModel = require('../models').Hotel;
 
 module.exports = (function () {
 
+    let errorIdNoExiste = {
+        codigo: 1,
+        descripcion: 'El id a borrar no existe'
+    };
+    let errorIdNoIndicado = {
+        codigo: 3,
+        descripcion: 'Indique el id del hotel'
+    };
+    let errorNombreNoIndicado = {
+        codigo: 2,
+        descripcion: 'Indique el nombre del hotel'
+    };
+
+
     function armarFiltros(filtros) {
         var where = {};
 
@@ -25,10 +39,7 @@ module.exports = (function () {
 
     function guardar(nuevoHotel) {
         return HotelModel.create(nuevoHotel).catch((err) => {
-            throw {
-                codigo: 2,
-                descripcion: 'Indique el nombre del hotel'
-            };
+            throw errorNombreNoIndicado;
         }).then((hotel) => {
             return new Promise((resolve, reject) => {
                 resolve(hotel);
@@ -47,13 +58,9 @@ module.exports = (function () {
             }
         }).then((cantidadBorrados) => {
             if (!id) {
-                throw {
-                    descripcion: 'El id a borrar no puede ser nulo'
-                };
+                throw errorIdNoIndicado;
             } else if (!cantidadBorrados) {
-                throw {
-                    descripcion: 'El id a borrar no existe'
-                };
+                throw errorIdNoExiste;
             } else {
                 return new Promise((resolve, reject) => {
                     resolve(cantidadBorrados);
@@ -68,18 +75,12 @@ module.exports = (function () {
                 id: id
             }
         }).catch((err) => {
-            throw {
-                codigo: 2,
-                descripcion: 'Indique el nombre del hotel'
-            };
+            throw errorNombreNoIndicado;
         }).then((hotelActualizado) => {
             if (hotelActualizado[0] !== 0) {
                 return buscarPorId(id);
             } else {
-                throw {
-                    codigo: 1,
-                    descripcion: 'El id que intente actualizar no existe'
-                };
+                throw errorIdNoExiste;
             }
         });
     }

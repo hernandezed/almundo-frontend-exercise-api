@@ -158,7 +158,7 @@ module.exports = {
     eliminar_conIdNulo_lanzaError(done) {
         let id = null;
         HotelService.borrar(id).catch((err) => {
-            err.descripcion.should.be.equal('El id a borrar no puede ser nulo');
+            err.descripcion.should.be.equal('Indique el id del hotel');
             done();
         });
     },
@@ -225,7 +225,7 @@ module.exports = {
         let id = 1619011;
         HotelService.actualizar(id, nuevoHotel).catch((err) => {
             err.codigo.should.be.equal(1);
-            err.descripcion.should.be.equal('El id que intente actualizar no existe');
+            err.descripcion.should.be.equal('El id a borrar no existe');
             done();
         });
     },
