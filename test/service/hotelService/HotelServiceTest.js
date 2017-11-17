@@ -3,7 +3,7 @@ const sequelize = require('sequelize');
 const chai = require('chai');
 
 const HotelServiceTestCases = require('./HotelServiceTestCase');
-const MockBaseDeDatos = require("../../mockBaseDeDatos");
+const MockBaseDeDatos = require('../../mockBaseDeDatos');
 
 describe('HotelService', () => {
 

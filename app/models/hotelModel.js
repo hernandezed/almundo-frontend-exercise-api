@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    var Hotel = sequelize.define("Hotel", {
+    var Hotel = sequelize.define('Hotel', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -15,7 +15,7 @@ module.exports = function (sequelize, DataTypes) {
             validate: {
                 len: {
                     args: 1,
-                    msg: "El nombre del hotel no puede estar vacio"
+                    msg: 'El nombre del hotel no puede estar vacio'
                 }
             }
         },

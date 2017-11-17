@@ -30,17 +30,6 @@ module.exports = {
     },
     getHoteles_conHotelesCargadosYFiltrosPorNombre_retornaUnHotelYStatus200: (done) => {
         chai.request(server)
-                .get(hotelesUri + '?nombre=Hotel Santa Cruz')
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('array');
-                    res.body.length.should.be.eql(1);
-                    done();
-                });
-
-    },
-    getHoteles_conHotelesCargadosYFiltrosPorNombre_retornaUnHotelYStatus200: (done) => {
-        chai.request(server)
                 .get(hotelesUri + '?nombre=Hotel Santa Cruz&estrellas=3')
                 .end((err, res) => {
                     res.should.have.status(200);
@@ -70,7 +59,7 @@ module.exports = {
     },
     getHotel_conIdValido_retornaHotelYStatus200: (done) => {
         let id = 249942;
-        hotelBuscado = "Hotel Stefanos";
+        hotelBuscado = 'Hotel Stefanos';
         chai.request(server)
                 .get(hotelesUri + '/' + id)
                 .end((err, res) => {
@@ -82,7 +71,7 @@ module.exports = {
     },
     getHotel_conIdInexistente_retornaStatus404: (done) => {
         let id = 12499421;
-        hotelBuscado = "Hotel Stefanos";
+        hotelBuscado = 'Hotel Stefanos';
         chai.request(server)
                 .get(hotelesUri + '/' + id)
                 .end((err, res) => {
@@ -92,18 +81,18 @@ module.exports = {
     },
     postHotel_conHotelValido_retornaNuevoHotelYStatus201: (done) => {
         let hotel = {
-            name: "Hotel Santa Cruz",
+            name: 'Hotel Santa Cruz',
             stars: 3,
             price: 1267.57,
-            image: "6623490_6_b.jpg",
+            image: '6623490_6_b.jpg',
             amenities: [
-                "nightclub",
-                "business-center",
-                "bathtub",
-                "newspaper",
-                "restaurant"
+                'nightclub',
+                'business-center',
+                'bathtub',
+                'newspaper',
+                'restaurant'
             ]
-        }
+        };
         chai.request(server)
                 .post(hotelesUri)
                 .send(hotel)
@@ -116,18 +105,18 @@ module.exports = {
     },
     postHotel_conHotelInvalido_retornaStatus400: (done) => {
         let hotel = {
-            name: "",
+            name: '',
             stars: 3,
             price: 1267.57,
-            image: "6623490_6_b.jpg",
+            image: '6623490_6_b.jpg',
             amenities: [
-                "nightclub",
-                "business-center",
-                "bathtub",
-                "newspaper",
-                "restaurant"
+                'nightclub',
+                'business-center',
+                'bathtub',
+                'newspaper',
+                'restaurant'
             ]
-        }
+        };
         chai.request(server)
                 .post(hotelesUri)
                 .send(hotel)
@@ -139,7 +128,7 @@ module.exports = {
     deleteHotel_conIdValido_retornaStatus204: (done) => {
         let id = 249942;
         chai.request(server)
-                .delete(hotelesUri + "/" + id)
+                .delete(hotelesUri + '/' + id)
                 .end((err, res) => {
                     res.should.have.status(204);
                     done();
@@ -149,7 +138,7 @@ module.exports = {
     deleteHotel_conIdInvalido_retornaStatus404: (done) => {
         let id = 2499421;
         chai.request(server)
-                .delete(hotelesUri + "/" + id)
+                .delete(hotelesUri + '/' + id)
                 .end((err, res) => {
                     res.should.have.status(404);
                     done();
@@ -158,22 +147,22 @@ module.exports = {
     },
     putHotel_conHotelValido_retornaHotelActualizadoYStatus200(done) {
         let nuevoHotel = {
-            name: "Hotel Stefanos",
+            name: 'Hotel Stefanos',
             stars: 5,
             price: 994.18,
-            image: "4900059_30_b.jpg",
+            image: '4900059_30_b.jpg',
             amenities: [
-                "safety-box",
-                "nightclub",
-                "deep-soaking-bathtub",
-                "beach",
-                "business-center"
+                'safety-box',
+                'nightclub',
+                'deep-soaking-bathtub',
+                'beach',
+                'business-center'
             ]
         };
-        nombreAntes = "Hotel Santa Cruz";
+        nombreAntes = 'Hotel Santa Cruz';
         let id = 161901;
         chai.request(server)
-                .put(hotelesUri + "/" + id)
+                .put(hotelesUri + '/' + id)
                 .send(nuevoHotel)
                 .end((err, res) => {
                     res.should.have.status(200);
@@ -184,22 +173,22 @@ module.exports = {
     },
     putHotel_conHotelInvalido_retornaStatus400(done) {
         let nuevoHotel = {
-            name: "     ",
+            name: '     ',
             stars: 5,
             price: 994.18,
-            image: "4900059_30_b.jpg",
+            image: '4900059_30_b.jpg',
             amenities: [
-                "safety-box",
-                "nightclub",
-                "deep-soaking-bathtub",
-                "beach",
-                "business-center"
+                'safety-box',
+                'nightclub',
+                'deep-soaking-bathtub',
+                'beach',
+                'business-center'
             ]
         };
-        nombreAntes = "Hotel Santa Cruz";
+        nombreAntes = 'Hotel Santa Cruz';
         let id = 161901;
         chai.request(server)
-                .put(hotelesUri + "/" + id)
+                .put(hotelesUri + '/' + id)
                 .send(nuevoHotel)
                 .end((err, res) => {
                     res.should.have.status(400);
@@ -209,20 +198,20 @@ module.exports = {
     putHotel_conIdInexistente_retornaStatus404(done) {
         let id = 1619011;
         let nuevoHotel = {
-            name: "Hotel Stefanos",
+            name: 'Hotel Stefanos',
             stars: 5,
             price: 994.18,
-            image: "4900059_30_b.jpg",
+            image: '4900059_30_b.jpg',
             amenities: [
-                "safety-box",
-                "nightclub",
-                "deep-soaking-bathtub",
-                "beach",
-                "business-center"
+                'safety-box',
+                'nightclub',
+                'deep-soaking-bathtub',
+                'beach',
+                'business-center'
             ]
         };
         chai.request(server)
-                .put(hotelesUri + "/" + id)
+                .put(hotelesUri + '/' + id)
                 .send(nuevoHotel)
                 .end((err, res) => {
                     res.should.have.status(404);

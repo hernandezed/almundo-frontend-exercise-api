@@ -1,3 +1,5 @@
+/* jshint node: true */
+
 const HotelModel = require('../app/models').Hotel;
 const data = require('../seeders/data/data');
 

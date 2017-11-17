@@ -9,7 +9,7 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 const HotelTestCases = require('./hotelTestCases');
-const MockBaseDeDatos = require("../mockBaseDeDatos");
+const MockBaseDeDatos = require('../mockBaseDeDatos');
 
 describe('Hoteles', () => {
 

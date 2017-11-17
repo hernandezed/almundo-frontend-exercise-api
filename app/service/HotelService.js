@@ -2,11 +2,6 @@ const HotelModel = require('../models').Hotel;
 
 module.exports = (function () {
 
-
-    function buscarTodos(filtros) {
-        return HotelModel.findAll(armarFiltros(filtros || {}));
-    }
-
     function armarFiltros(filtros) {
         var where = {};
 
@@ -14,7 +9,7 @@ module.exports = (function () {
             where.stars = filtros.estrellas;
         }
         if (filtros.nombre) {
-            where.name = {$like: "%" + filtros.nombre + "%"};
+            where.name = {$like: '%' + filtros.nombre + '%'};
         }
 
         if (Object.keys(where).length !== 0) {
@@ -24,19 +19,23 @@ module.exports = (function () {
         }
     }
 
+    function buscarTodos(filtros) {
+        return HotelModel.findAll(armarFiltros(filtros || {}));
+    }
+
     function guardar(nuevoHotel) {
         return HotelModel.create(nuevoHotel).catch((err) => {
             throw {
                 codigo: 2,
-                descripcion: "Indique el nombre del hotel"
-            }
+                descripcion: 'Indique el nombre del hotel'
+            };
         }).then((hotel) => {
             return new Promise((resolve, reject) => {
-                resolve(hotel)
-            })
+                resolve(hotel);
+            });
         });
     }
-    
+
     function buscarPorId(id) {
         return HotelModel.findById(id);
     }
@@ -49,18 +48,18 @@ module.exports = (function () {
         }).then((cantidadBorrados) => {
             if (!id) {
                 throw {
-                    descripcion: "El id a borrar no puede ser nulo"
-                }
+                    descripcion: 'El id a borrar no puede ser nulo'
+                };
             } else if (!cantidadBorrados) {
                 throw {
-                    descripcion: "El id a borrar no existe"
-                }
+                    descripcion: 'El id a borrar no existe'
+                };
             } else {
                 return new Promise((resolve, reject) => {
                     resolve(cantidadBorrados);
-                })
+                });
             }
-        })
+        });
     }
 
     function actualizar(id, nuevoHotel) {
@@ -71,16 +70,16 @@ module.exports = (function () {
         }).catch((err) => {
             throw {
                 codigo: 2,
-                descripcion: "Indique el nombre del hotel"
-            }
+                descripcion: 'Indique el nombre del hotel'
+            };
         }).then((hotelActualizado) => {
             if (hotelActualizado[0] !== 0) {
                 return buscarPorId(id);
             } else {
                 throw {
                     codigo: 1,
-                    descripcion: "El id que intente actualizar no existe"
-                }
+                    descripcion: 'El id que intente actualizar no existe'
+                };
             }
         });
     }

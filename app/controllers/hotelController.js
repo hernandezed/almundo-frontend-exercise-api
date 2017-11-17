@@ -30,7 +30,7 @@ module.exports = {
             res.status(204).send();
         }).catch(err => {
             res.status(404).json(err);
-        })
+        });
     },
     actualizar: (req, res, next) => {
         hotelService.actualizar(req.params.id, req.body).then((hotel) => {
@@ -43,4 +43,4 @@ module.exports = {
             }
         });
     }
-}
+};
