@@ -2,4 +2,6 @@ var config = require('config');
 
 config.db.config = __filename;
 
+config.db.seedersPath = './config/seeders';
+
 module.exports = config.db;
