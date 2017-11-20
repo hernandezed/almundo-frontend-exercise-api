@@ -2,3 +2,4 @@
 /nbproject/private/
 db.development.sqlite
 /coverage/
+/.nyc_output/

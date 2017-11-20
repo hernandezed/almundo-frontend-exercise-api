@@ -1,7 +1,5 @@
-/* jshint node: true */
-
 const HotelModel = require('../app/models').Hotel;
-const data = require('../seeders/data/data');
+const data = require('../config/seeders/data/data');
 
 data.forEach(function (hotel) {
     hotel.id = parseInt(hotel.id);
