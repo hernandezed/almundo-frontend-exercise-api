@@ -43,7 +43,8 @@ module.exports = {
         chai.request(server)
                 .get(hotelesUri + '?nombre=Hotel Santa Cruz&estrellas=2')
                 .end((err, res) => {
-                    res.should.have.status(404);
+                    res.should.have.status(200);
+                    res.body.length.should.be.eql(0);
                     done();
                 });
     },

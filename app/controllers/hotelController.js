@@ -3,11 +3,7 @@ let hotelService = require('../service/HotelService');
 module.exports = {
     buscarTodos: (req, res, next) => {
         hotelService.buscarTodos(req.query).then((hoteles) => {
-            if (hoteles.length > 0) {
-                res.send(hoteles);
-            } else {
-                res.status(404).send();
-            }
+            res.send(hoteles);
         });
     },
     buscarPorId: (req, res, next) => {

@@ -1,7 +1,7 @@
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const dbConfig = require('config').db;
+const fs = require("fs");
+const path = require("path");
+const Sequelize = require("sequelize");
+const dbConfig = require("config").db;
 
 let sequelize;
 if (process.env.DATABASE_URL) {
@@ -12,14 +12,14 @@ if (process.env.DATABASE_URL) {
 let db = {};
 
 fs.readdirSync(__dirname).filter(function (file) {
-    return (file.indexOf('.') !== 0) && (file !== 'index.js');
+    return (file.indexOf(".") !== 0) && (file !== "index.js");
 }).forEach(function (file) {
     var model = sequelize.import(path.join(__dirname, file));
     db[model.name] = model;
 });
 
 Object.keys(db).forEach(function (modelName) {
-    if ('associate' in db[modelName]) {
+    if ("associate" in db[modelName]) {
         db[modelName].associate(db);
     }
 });
