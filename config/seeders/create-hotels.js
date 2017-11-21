@@ -17,7 +17,6 @@ module.exports = {
             price: Sequelize.DOUBLE(6, 2),
             amenities: Sequelize.STRING
         });
-        console.log("asdasd")
         return queryInterface.bulkInsert('Hotels', data);
     },
     down: function (queryInterface, Sequelize) {
