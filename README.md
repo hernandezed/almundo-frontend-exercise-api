@@ -37,7 +37,7 @@ npm run jshint
 npm run covertura
 ```
 
-API Rest
+## API Rest
 1. Obtener Hoteles
 ```
 GET /hoteles
