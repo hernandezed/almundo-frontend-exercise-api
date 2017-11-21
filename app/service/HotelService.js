@@ -38,6 +38,7 @@ module.exports = (function () {
     }
 
     function guardar(nuevoHotel) {
+        nuevoHotel.id = null;
         return HotelModel.create(nuevoHotel).catch((err) => {
             throw errorNombreNoIndicado;
         }).then((hotel) => {
